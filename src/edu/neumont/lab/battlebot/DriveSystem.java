@@ -10,6 +10,19 @@ public class DriveSystem {
 		Motor.C.forward();
 	}
 	
+	public void HidePerson()
+	{
+		goHighSpeed();
+		setMovingBackward();
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		stop();
+	}
+	
 	public void goHighSpeed()
 	{
 		Motor.A.setSpeed(500);
