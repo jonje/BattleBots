@@ -7,6 +7,7 @@ public class DriveSystem {
 	public DriveSystem()
 	{
 		//initialize
+		Motor.C.setSpeed(500);
 		Motor.C.forward();
 	}
 	
@@ -25,8 +26,8 @@ public class DriveSystem {
 	
 	public void goHighSpeed()
 	{
-		Motor.A.setSpeed(500);
-		Motor.B.setSpeed(500);
+		Motor.A.setSpeed(600);
+		Motor.B.setSpeed(600);
 	}
 	public void goNormalSpeed()
 	{
@@ -73,14 +74,14 @@ public class DriveSystem {
 	
 	public void setEscapeRight()
 	{
-		Motor.A.setSpeed(500);
+		Motor.A.setSpeed(600);
 		Motor.A.forward();
 		Motor.B.forward();
 	}
 	
 	public void setEscapeLeft()
 	{
-		Motor.B.setSpeed(500);
+		Motor.B.setSpeed(600);
 		Motor.B.forward();
 		Motor.A.forward();
 	}
