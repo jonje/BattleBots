@@ -5,7 +5,7 @@ import lejos.nxt.SensorPort;
 
 public class LineDetector {
 	private LightSensor lineDetector;
-	private final int LINE_VALUE = 50;
+	private final int LINE_VALUE = 45;
 	
 	public LineDetector() {
 		lineDetector = new LightSensor(SensorPort.S2);
