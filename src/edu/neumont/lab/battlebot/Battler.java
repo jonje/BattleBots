@@ -12,7 +12,7 @@ public class Battler {
 	
 	public void runBattle()
 	{
-		System.out.println("RUN BATTLE RAN");
+		
 	}
 	
 	public void testLineSystem()
