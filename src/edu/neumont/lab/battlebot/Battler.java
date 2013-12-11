@@ -81,6 +81,10 @@ public class Battler {
 			{
 				waitingForLine = (lineOperations())?false:true;
 			}
+			else if(line.isLineDetected())
+			{
+				lineOperations();
+			}
 			else if(sensor.isLeftButtonPushed() || sensor.isRightButtonPushed())
 			{
 				waitingForLine = true;
@@ -105,12 +109,36 @@ public class Battler {
 	
 	public void testLineSystem()
 	{
-		System.out.println("LINE SYSTEM RAN");
+		int oldValue = 0;
+		
+		while(!Button.ENTER.isDown())
+		{
+			int newValue = line.getValue();
+			if(newValue != oldValue)
+			{
+				System.out.println(newValue);
+				oldValue = newValue;
+			}
+		}
 	}
 	
 	public void testSensors()
 	{
-		System.out.println("SENSOR TESTS RAN");
+		while(!Button.ENTER.isDown())
+		{
+			if(sensor.isRobotInPath())
+			{
+				System.out.println("ROBOT DETECTED");
+			}
+			if(sensor.isLeftButtonPushed())
+			{
+				System.out.println("LEFT ESCAPE DETECTED");
+			}
+			if(sensor.isRightButtonPushed())
+			{
+				System.out.println("RIGHT ESCAPE DETECTED");
+			}
+		}
 	}
 	
 	public void testDriveSystem() throws InterruptedException

@@ -14,5 +14,10 @@ public class LineDetector {
 	public boolean isLineDetected() {
 		return (lineDetector.getLightValue() > LINE_VALUE);
 	}
+	
+	public int getValue()
+	{
+		return lineDetector.getLightValue();
+	}
 
 }
