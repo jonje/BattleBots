@@ -6,6 +6,9 @@ public class Battler {
 	DriveSystem drive;
 	LineDetector line;
 	RobotDetector sensor;
+	BotTimer timer = new BotTimer();
+	boolean mustCheckTime, turning;
+	double oldTime;
 	
 	public Battler()
 	{
@@ -71,11 +74,20 @@ public class Battler {
 	
 	public void runBattle()
 	{
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		timer.start();
+		
 		drive.HidePerson();
+		mustCheckTime = false;
+		turning = false;
 		boolean waitingForLine = false;
 		boolean turn = true;
 		
-		while(!Button.ENTER.isDown())
+		while(!Button.ESCAPE.isDown())
 		{
 			if(waitingForLine)
 			{
@@ -87,7 +99,6 @@ public class Battler {
 			}
 			else if(sensor.isLeftButtonPushed() || sensor.isRightButtonPushed())
 			{
-				waitingForLine = true;
 				escapeOperations();
 			}
 			else if(sensor.isRobotInPath())
@@ -96,13 +107,24 @@ public class Battler {
 				turn = turn?false:true;
 				waitingForLine = killOperations();
 			}
-			else
+			else if(!mustCheckTime)
 			{
+				oldTime = timer.getTime();
 				drive.goLowSpeed();
-				if(turn)
-					drive.setTurningRight();
-				else
-					drive.setTurningLeft();
+				drive.setTurningRight();
+				mustCheckTime = true;
+				turning = true;
+			}
+			else if(turning && timer.getTime() > (2+oldTime))
+			{
+				drive.stop();
+				drive.setMovingForward();
+				turning = false;
+			}
+			else if(timer.getTime() > (3.5+oldTime))
+			{
+				drive.stop();
+				mustCheckTime = false;
 			}
 		}
 	}
@@ -111,7 +133,7 @@ public class Battler {
 	{
 		int oldValue = 0;
 		
-		while(!Button.ENTER.isDown())
+		while(!Button.ESCAPE.isDown())
 		{
 			int newValue = line.getValue();
 			if(newValue != oldValue)
@@ -124,7 +146,7 @@ public class Battler {
 	
 	public void testSensors()
 	{
-		while(!Button.ENTER.isDown())
+		while(!Button.ESCAPE.isDown())
 		{
 			if(sensor.isRobotInPath())
 			{

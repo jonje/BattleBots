@@ -8,7 +8,7 @@ public class RobotDetector {
 	private UltrasonicSensor sonicSensor;
 	private TouchSensor leftSensor;
 	private TouchSensor rightSensor;
-	private final int MAX_DISTANCE = 70;
+	private final int MAX_DISTANCE = 40;
 
 	
 	
@@ -20,7 +20,7 @@ public class RobotDetector {
 	}
 	
 	public boolean isRobotInPath() {
-		return (sonicSensor.ping() < MAX_DISTANCE);
+		return (sonicSensor.getDistance() < MAX_DISTANCE);
 	}
 	
 	public boolean isLeftButtonPushed() {
