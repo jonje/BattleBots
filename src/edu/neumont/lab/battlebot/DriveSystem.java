@@ -42,14 +42,14 @@ public class DriveSystem {
 	
 	public void setMovingForward()
 	{
-		Motor.A.forward();
-		Motor.B.forward();
+		Motor.A.backward();
+		Motor.B.backward();
 	}
 	
 	public void setMovingBackward()
 	{
-		Motor.A.backward();
-		Motor.B.backward();
+		Motor.A.forward();
+		Motor.B.forward();
 	}
 	
 	public void stop()
